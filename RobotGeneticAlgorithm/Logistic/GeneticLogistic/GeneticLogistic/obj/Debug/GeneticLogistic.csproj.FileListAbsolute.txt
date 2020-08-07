@@ -1,0 +1,6 @@
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\obj\Debug\GeneticLogistic.csprojAssemblyReference.cache
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\obj\Debug\GeneticLogistic.csproj.CoreCompileInputs.cache
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\bin\Debug\GeneticLogistic.exe
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\bin\Debug\GeneticLogistic.pdb
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\obj\Debug\GeneticLogistic.exe
+C:\Users\Mariell\Documents\Project3\RobotGeneticAlgorithm\Logistic\GeneticLogistic\GeneticLogistic\obj\Debug\GeneticLogistic.pdb
