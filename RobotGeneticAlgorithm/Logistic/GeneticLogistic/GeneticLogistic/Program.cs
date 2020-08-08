@@ -1,5 +1,6 @@
 ﻿using System;
 using static GeneticLogistic.Terrain;
+using static GeneticLogistic.Robot;
 
 namespace GeneticLogistic
 {
@@ -10,6 +11,7 @@ namespace GeneticLogistic
         public static void Main(string[] args)
         {
             matrixTerrain = MakeTerrain();
+            //Proof();
         }
     }
 }
