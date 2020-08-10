@@ -1,15 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using static GeneticLogistic.Utilities;
 
 namespace GeneticLogistic
 {
     public class Terrain
     {
         public static int[,] matrixTerrain;
-        
-        //to generate the random number
-        private static readonly Random random = new Random(); 
-        private static readonly object syncLock = new object(); 
         
         //probability of each terrain to be selected shown as percentage
 
@@ -23,6 +20,18 @@ namespace GeneticLogistic
                 calculateStartEnd();
             }
 
+            //Verifies if the can actually get to the end 
+            if (matrixTerrain[0, 18] == 0 || matrixTerrain[1, 19] == 0)
+            {
+                calculatePreEnd();
+            }
+            
+            //Verifies if the can actually get out of the start 
+            if (matrixTerrain[18, 0] == 0 || matrixTerrain[19, 1] == 0)
+            {
+                calculatePostStart();
+            }
+            
             PrintMatrix();
             return matrixTerrain;
         }
@@ -40,7 +49,7 @@ namespace GeneticLogistic
             }
             else if (50 <= probability &&  75 > probability)
             {
-                return 2; //normal terrain 40-69
+                return 2; //medium terrain 40-69
             }
             else
             {
@@ -48,13 +57,7 @@ namespace GeneticLogistic
             }
         }
         
-        public static int RandomNumber(int min, int max)
-        {
-            lock(syncLock) { // synchronize
-                return random.Next(min, max);
-            }
-        }
-
+        
         private static void CreateMatrix()
         {
             matrixTerrain = new int[20,20];
@@ -85,7 +88,7 @@ namespace GeneticLogistic
             calculateStart();
             calculateEnd();
         }
-        
+
         private static void calculateStart()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
@@ -119,5 +122,88 @@ namespace GeneticLogistic
                 matrixTerrain[0, 19] = 3; //normal terrain 66-69
             }
         }
+        
+        private static void calculatePreEnd()
+        {
+            calculatePreEndLeft();
+            calculatePreEndDown();
+        }
+
+        private static void calculatePreEndLeft()
+        {
+            int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
+            if (probability < 33)
+            {
+                matrixTerrain[0, 18] = 1; //blocked terrain 0-32
+            }
+            else if (33 <= probability &&  66 > probability)
+            {
+                matrixTerrain[0, 18] = 2; //normal terrain 33-65
+            }
+            else
+            {
+                matrixTerrain[0, 18] = 3; //normal terrain 66-69
+            }
+        }
+
+        private static void calculatePreEndDown()
+        {
+            int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
+            if (probability < 33)
+            {
+                matrixTerrain[1, 19] = 1; //blocked terrain 0-32
+            }
+            else if (33 <= probability &&  66 > probability)
+            {
+                matrixTerrain[1, 19] = 2; //normal terrain 33-65
+            }
+            else
+            {
+                matrixTerrain[1, 19] = 3; //normal terrain 66-69
+            }
+        }
+        
+        private static void calculatePostStart()
+        {
+            calculatePostStartRight();
+            calculatePostStartUp();
+        }
+
+        private static void calculatePostStartRight()
+        {
+            int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
+            if (probability < 33)
+            {
+                matrixTerrain[19, 1] = 1; //blocked terrain 0-32
+            }
+            else if (33 <= probability &&  66 > probability)
+            {
+                matrixTerrain[19, 1] = 2; //normal terrain 33-65
+            }
+            else
+            {
+                matrixTerrain[19, 1] = 3; //normal terrain 66-69
+            }
+        }
+
+        private static void calculatePostStartUp()
+        {
+            int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
+            if (probability < 33)
+            {
+                matrixTerrain[18, 0] = 1; //blocked terrain 0-32
+            }
+            else if (33 <= probability &&  66 > probability)
+            {
+                matrixTerrain[18, 0] = 2; //normal terrain 33-65
+            }
+            else
+            {
+                matrixTerrain[18, 0] = 3; //normal terrain 66-69
+            }
+        }
+        
     }
+    
+    
 }

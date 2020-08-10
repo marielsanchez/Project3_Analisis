@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq;
+using static GeneticLogistic.Utilities;
 
 namespace GeneticLogistic
 {
     public class Robot
     {
+        //Standar: 0 - 84
+        //Plus: 85 - 169
+        //Pro: 170 - 255
         private byte batery;
         private byte camera;
         private byte motor;
+        private byte[] DNA;//contains the combination of the RobotDNA
         
         public int bateryLeft;
         public int fitness;
-        
-        //to generate the random number
-        private static readonly Random random = new Random(); 
-        private static readonly object syncLock = new object(); 
 
         public Robot()
         {
@@ -44,11 +45,5 @@ namespace GeneticLogistic
 
         }
         
-        public static int RandomNumber(int min, int max)
-        {
-            lock(syncLock) { // synchronize
-                return random.Next(min, max);
-            }
-        }
     }
 }
