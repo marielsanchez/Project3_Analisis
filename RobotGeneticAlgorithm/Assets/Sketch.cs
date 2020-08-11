@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Sketch : MonoBehaviour
 {
-    private bool target; //the terrain robots have to cross
-    private int popmax;
-    private float mutationRate;
-    private int bestTry;
-    //allPhrase
-    // stats
+    
     
     // Start is called before the first frame update
     void Start()

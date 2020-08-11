@@ -6,14 +6,25 @@ namespace GeneticLogistic
 {
     public class Terrain
     {
-        public static int[,] matrixTerrain;
-        
-        //probability of each terrain to be selected shown as percentage
+        public int[,] matrixTerrain;
+        public int actualRow;
+        public int actualColumn;
 
-        public static int[,] MakeTerrain()
+        private int probabilityBlocked = 10;
+        private int probabilityEasy = 40;
+        private int probabilityMedium = 70;
+
+        public Terrain()
+        {
+            MakeTerrain();
+        }
+
+        private void MakeTerrain()
         {
             CreateMatrix();
-
+            actualRow = 19;
+            actualColumn = 0;
+            
             //Verifies if the start or end are blocked cells
             if (matrixTerrain[0, 19] == 0 || matrixTerrain[19, 0] == 0)
             {
@@ -33,21 +44,21 @@ namespace GeneticLogistic
             }
             
             PrintMatrix();
-            return matrixTerrain;
+            //return matrixTerrain;
         }
 
-        public static int TerrainProbability()
+        public int TerrainProbability()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
-            if (probability < 25)
+            if (probability < probabilityBlocked)
             {
                 return 0; //blocked terrain 0-9
             }
-            else if (25 <= probability &&  50 > probability)
+            else if (probabilityBlocked <= probability &&  probabilityEasy > probability)
             {
                 return 1; //normal terrain 10-39
             }
-            else if (50 <= probability &&  75 > probability)
+            else if (probabilityEasy <= probability &&  probabilityMedium > probability)
             {
                 return 2; //medium terrain 40-69
             }
@@ -57,8 +68,7 @@ namespace GeneticLogistic
             }
         }
         
-        
-        private static void CreateMatrix()
+        private void CreateMatrix()
         {
             matrixTerrain = new int[20,20];
             for(int i = 0; i < matrixTerrain.GetLength(0); i++) 
@@ -70,7 +80,7 @@ namespace GeneticLogistic
             }
         }
 
-        private static void PrintMatrix()
+        private void PrintMatrix()
         {
             for(int i = 0; i < matrixTerrain.GetLength(0); i++) 
             {
@@ -83,13 +93,13 @@ namespace GeneticLogistic
             }
         }
 
-        private static void calculateStartEnd()
+        private void calculateStartEnd()
         {
             calculateStart();
             calculateEnd();
         }
 
-        private static void calculateStart()
+        private void calculateStart()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -106,7 +116,7 @@ namespace GeneticLogistic
             }
         }
         
-        private static void calculateEnd()
+        private void calculateEnd()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -123,13 +133,13 @@ namespace GeneticLogistic
             }
         }
         
-        private static void calculatePreEnd()
+        private void calculatePreEnd()
         {
             calculatePreEndLeft();
             calculatePreEndDown();
         }
 
-        private static void calculatePreEndLeft()
+        private void calculatePreEndLeft()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -146,7 +156,7 @@ namespace GeneticLogistic
             }
         }
 
-        private static void calculatePreEndDown()
+        private void calculatePreEndDown()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -163,13 +173,13 @@ namespace GeneticLogistic
             }
         }
         
-        private static void calculatePostStart()
+        private void calculatePostStart()
         {
             calculatePostStartRight();
             calculatePostStartUp();
         }
 
-        private static void calculatePostStartRight()
+        private void calculatePostStartRight()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -186,7 +196,7 @@ namespace GeneticLogistic
             }
         }
 
-        private static void calculatePostStartUp()
+        private void calculatePostStartUp()
         {
             int probability  = RandomNumber(0, 99); //rnd.Next(0, 99);  // creates a number between 0 and 99
             if (probability < 33)
@@ -201,6 +211,35 @@ namespace GeneticLogistic
             {
                 matrixTerrain[18, 0] = 3; //normal terrain 66-69
             }
+        }
+        
+        // -------------- ROBOT METHODS
+        
+        public int getValue(int row, int column)
+        {
+            if (row > 19 || column > 19)
+            {
+                return 0;
+            }
+            if (row < 0  || column < 0)
+            {
+                return 0;
+            }
+            return matrixTerrain[row, column];
+        }
+        public int[] getActual()
+        {
+            int[] result; 
+            result = new int[2];
+            result[0] = actualRow;
+            result[1] = actualColumn;
+            return result;
+        }
+        
+        public void moveTo(int row, int column)
+        {
+            actualRow = row;
+            actualColumn = column;
         }
         
     }

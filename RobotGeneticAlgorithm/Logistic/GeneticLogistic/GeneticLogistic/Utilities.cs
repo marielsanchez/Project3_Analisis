@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace GeneticLogistic
 {
@@ -15,5 +16,11 @@ namespace GeneticLogistic
             }
         }
 
+        public static string ConvertStringArrayToStringJoin(string[] array)
+        {
+            // Use string Join to concatenate the string elements.
+            string result = string.Join("", array);
+            return result;
+        }
     }
 }

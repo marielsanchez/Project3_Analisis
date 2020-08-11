@@ -7,21 +7,20 @@ namespace GeneticLogistic
 {
     class Program
     {
-        public static int[,] matrixTerrain;
+        private static int popmax  = 50;
+        private static double mutationRate = 0.01;
+        private static Terrain terrain =  new Terrain();
+        private static Population p;
         
         public static void Main(string[] args)
         {
-            //matrixTerrain = MakeTerrain();
-            //Proof();
-            //double prob = 25;
-            //prob = (prob / 2);
-            //Console.WriteLine(prob);
-            int[] array = new[] {1, 0, 1, 0};
-            MarkovChain mar = new MarkovChain(array,0,0,80);
-            
-            int result = mar.GenerateProbability();
-            Console.WriteLine(result);
-            //MarkovChain(int[] stat, byte bat, byte cam, byte mot)
+            p = new Population(terrain, mutationRate, popmax);
+
+            while (p.evaluate())
+            {
+                p.naturalSelection();
+                p.generate();
+            }
         }
     }
 }

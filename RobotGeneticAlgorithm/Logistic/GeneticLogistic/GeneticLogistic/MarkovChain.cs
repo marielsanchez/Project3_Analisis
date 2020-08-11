@@ -290,12 +290,7 @@ namespace GeneticLogistic
             probabilityDown += probabilityUp;
             probabilityLeft += probabilityDown;
             probabilityRight += probabilityLeft;
-            
-            Console.WriteLine(probabilityUp);
-            Console.WriteLine(probabilityDown);
-            Console.WriteLine(probabilityLeft);
-            Console.WriteLine(probabilityRight);
-            
+
             // if there's a 50% prob at least
             if (statesNum == 2)
             {
@@ -311,7 +306,6 @@ namespace GeneticLogistic
         private int Calculate4States()
         {
             int probability  = RandomNumber(0, 99);
-            Console.WriteLine("Random = " + probability);
 
             if (probability < probabilityDown)
             {
@@ -334,7 +328,6 @@ namespace GeneticLogistic
         private int Calculate3States()
         {
             int probability  = RandomNumber(0, 99);
-            Console.WriteLine("Random = " + probability);
             //see if the first prob or last prob is 0
             if (probabilityUp == 0)
             {
@@ -374,7 +367,6 @@ namespace GeneticLogistic
         private int Calculate2States()
         {
             int probability  = RandomNumber(0, 99);
-            Console.WriteLine("Random = " + probability);
             //see if the first prob or last prob is 0
             if (probabilityUp == 0)
             {
